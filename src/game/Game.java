@@ -9,15 +9,19 @@ public class Game {
     private final int id;
     private final Board board;
     
-    public Game(){
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMddmmss");
-        this.id = Integer.parseInt(dtf.format(now));
+    public Game(){     
+        this.id = initUniqId();
         this.board = new Board();
     }
 
     public int getId(){
         return this.id;
+    }
+    
+    private int initUniqId() {
+    	LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMddmmss");
+        return Integer.parseInt(dtf.format(now));
     }
 
    

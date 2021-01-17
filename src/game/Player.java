@@ -1,10 +1,7 @@
 package src.game;
 
-import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class Player {
-
     private String name;
     private int position;
     private int coins;
@@ -16,8 +13,7 @@ public class Player {
     }
 
     private String initName(){
-        Scanner scanner = new Scanner( System.in );
-        return scanner.next();
+        return Board.scanner.next();
     }
 
     public String getName(){
