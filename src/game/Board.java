@@ -10,7 +10,7 @@ public class Board {
     private final int size;
     //private Square[] squares;
     private Effect[] effect;
-    protected final static Scanner scanner = new Scanner( System.in );
+    
     private final ArrayList<Player> players;
     private static final Random RANDOM = new Random();
     private final static ResourceBundle bundle = ResourceBundle.getBundle("src.game.properties.config");
@@ -27,7 +27,6 @@ public class Board {
         this.size = initSize();
         this.players = initPlayers();
         this.effect = generateEffect();
-        Board.scanner.close();
     }
 
     public String getName(){
@@ -37,7 +36,15 @@ public class Board {
     public int getSize(){
         return this.size;
     }
-
+    public ArrayList<Player> getPlayers(){
+    	return this.players;
+    }
+    public Effect getEffect(int position) {
+    	return this.effect[position];
+    }
+    public void setEffect(Effect newEffect, int position) {
+    	this.effect[position] = newEffect;
+    }
     private String initName(){
         int boardName = 0;
             do {
@@ -47,7 +54,7 @@ public class Board {
                     i++;
                 }
                 System.out.println("Choose the number of map name:");
-                boardName = Board.scanner.nextInt();
+                boardName = Launcher.scanner.nextInt();
             } while (boardName > BOARD_NAMES.length || boardName <= 0);
         return BOARD_NAMES[boardName-1];
     }
@@ -56,7 +63,7 @@ public class Board {
         int boardSize = 0;
             do {
                 System.out.println("Enter the size of map (" + MIN_BOARD_SIZE + "-" + MAX_BOARD_SIZE + "):");
-                boardSize = Board.scanner.nextInt();
+                boardSize = Launcher.scanner.nextInt();
             } while (boardSize > MAX_BOARD_SIZE || boardSize < MIN_BOARD_SIZE);
         return boardSize;
     }
@@ -66,7 +73,7 @@ public class Board {
         int arraySize = 0;
             do {
                 System.out.println("Enter the number of players (" + MIN_PLAYERS + "-" + MAX_PLAYERS + "):");
-                arraySize = Board.scanner.nextInt();
+                arraySize = Launcher.scanner.nextInt();
             } while (arraySize > MAX_PLAYERS || arraySize < MIN_PLAYERS);
 
             for (int i = 0; i < arraySize; i++) {
@@ -89,10 +96,10 @@ public class Board {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("|-------------------------------|\n");
-        sb.append("|---------");
+        sb.append("|--------- Name: ");
         sb.append(getName());
         sb.append("----------|");
-        sb.append("|---------");
+        sb.append("|--------- Taille: ");
         sb.append(getSize());
         sb.append("----------|\n");
         for(int i = 0; i < this.getSize(); i++) {
@@ -103,6 +110,7 @@ public class Board {
             }
         	sb.append("|------");
         	//sb.append(effect[i].toString());
+        	sb.append(i + " ");
         	sb.append(effect[i].getName());
         	sb.append("------|");
         }
