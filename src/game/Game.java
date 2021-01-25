@@ -20,6 +20,9 @@ public class Game {
     public int getId(){
         return this.id;
     }
+    public Board getBoard() {
+    	return this.board;
+    }
     
     private int initUniqId() {
     	LocalDateTime now = LocalDateTime.now();
@@ -85,6 +88,7 @@ public class Game {
 							int rep = Launcher.scanner.nextInt();
 							if(rep==1){
 								//ici on enregistre la game dans la bdd et on lui retourne un code de la game
+								GameFile.SaveGame(this);
 								return;
 							}else{
 								return;

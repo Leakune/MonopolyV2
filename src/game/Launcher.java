@@ -1,5 +1,7 @@
 package src.game;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Launcher {
@@ -21,7 +23,10 @@ public class Launcher {
 					newGame.startGame();
 					
 				}
-				case 2 -> System.out.println("Here you'll be able to load a game you saved");
+				case 2 -> {
+					System.out.println("Loading Game...");
+					GameFile.loadGame();
+				}
 				case 3 -> {
 					System.out.println("Exiting the game.. See ya next time !");
 					Launcher.scanner.close();
