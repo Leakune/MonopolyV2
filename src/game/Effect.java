@@ -1,20 +1,22 @@
 package src.game;
 
 public enum Effect {
-	BEGIN("Begin", "It's the beginning, everyone start with 5 coins!", 19),
-	EMPTY("Empty", "Nothing happened.", 0),
-	BONUS("Bonus", "You gain 6 coins!", 6),
-	LOOSE("Loose", "You loose 2 coins...", -2),
-	PEN4A("Pen4a", "What the *family friendly game*, everyone loose 1 coin!", -1);
+	BEGIN("Begin", "It's the beginning, everyone start with 5 coins!", 19, 0),
+	EMPTY("Empty", "Nothing happened.", 0, -1),
+	BONUS("Bonus", "You gain 6 coins!", 6, -6),
+	LOOSE("Loose", "You loose 2 coins...", -2, -2),
+	PEN4A("Pen4a", "What the *family friendly game*, everyone loose 1 coin!", -1, -1);
 
 	private final String name;
 	private final String message;
 	private final int value;
+	private final int cost;
 	
-	Effect(String name, String message, int value) {
+	Effect(String name, String message, int value, int cost) {
 		this.name = name;
 		this.message = message;
 		this.value = value;
+		this.cost = cost;
 	}
 
 	public String getName() {
@@ -27,6 +29,9 @@ public enum Effect {
 
 	public int getValue() {
 		return this.value;
+	}
+	public int getCost() {
+		return this.cost;
 	}
 	public static Effect chooseEffectToChange(int res) {
 		if (res == 1){

@@ -95,23 +95,20 @@ public class Board {
     
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("|-------------------------------|\n");
-        sb.append("|--------- Name: ");
-        sb.append(getName());
-        sb.append("----------|");
-        sb.append("|--------- Taille: ");
-        sb.append(getSize());
-        sb.append("----------|\n");
+        
+        for (Player p : players) {
+    		sb.append(p.toString());
+        }
         for(int i = 0; i < this.getSize(); i++) {
-        	for (Player p : players) {
-        		if(p.getPosition() == i) {
-        			sb.append(p.toString());
-        		}
-            }
         	sb.append("|------");
         	//sb.append(effect[i].toString());
         	sb.append(i + " ");
         	sb.append(effect[i].getName());
+        	for (Player p : players) {
+        		if(p.getPosition() == i) {
+        			sb.append(" " + p.getName());
+        		}
+            }
         	sb.append("------|");
         }
         return sb.toString();
