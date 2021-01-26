@@ -1,146 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game>
-	<id>1265651</id>
+	<id>1262025</id>
 	<board>
-		<nameBoard>Jungle</nameBoard>
+		<nameBoard>Temple</nameBoard>
 		<sizeBoard>20</sizeBoard>
 		<players>
 			<player>
 				<name>ludo</name>
-				<position>0</position>
-				<coins>19</coins>
+				<position>12</position>
+				<coins>9</coins>
 			</player>
 			<player>
 				<name>ivan</name>
-				<position>0</position>
-				<coins>19</coins>
-			</player>
-			<player>
-				<name>s</name>
-				<position>0</position>
-				<coins>19</coins>
+				<position>8</position>
+				<coins>13</coins>
 			</player>
 		</players>
 		<effects>
 			<effect>
-				<name>Begin</name>
+				<effectName>Begin</effectName>
 				<message>It's the beginning, everyone start with 5 coins!</message>
 				<value>19</value>
 				<cost>0</cost>
 			</effect>
 			<effect>
-				<name>Bonus</name>
+				<effectName>Loose</effectName>
+				<message>You loose 2 coins...</message>
+				<value>-2</value>
+				<cost>-2</cost>
+			</effect>
+			<effect>
+				<effectName>Loose</effectName>
+				<message>You loose 2 coins...</message>
+				<value>-2</value>
+				<cost>-2</cost>
+			</effect>
+			<effect>
+				<effectName>Loose</effectName>
+				<message>You loose 2 coins...</message>
+				<value>-2</value>
+				<cost>-2</cost>
+			</effect>
+			<effect>
+				<effectName>Pen4a</effectName>
+				<message>What the *family friendly game*, everyone loose 1 coin!</message>
+				<value>-1</value>
+				<cost>-1</cost>
+			</effect>
+			<effect>
+				<effectName>Loose</effectName>
+				<message>You loose 2 coins...</message>
+				<value>-2</value>
+				<cost>-2</cost>
+			</effect>
+			<effect>
+				<effectName>Loose</effectName>
+				<message>You loose 2 coins...</message>
+				<value>-2</value>
+				<cost>-2</cost>
+			</effect>
+			<effect>
+				<effectName>Loose</effectName>
+				<message>You loose 2 coins...</message>
+				<value>-2</value>
+				<cost>-2</cost>
+			</effect>
+			<effect>
+				<effectName>Loose</effectName>
+				<message>You loose 2 coins...</message>
+				<value>-2</value>
+				<cost>-2</cost>
+			</effect>
+			<effect>
+				<effectName>Loose</effectName>
+				<message>You loose 2 coins...</message>
+				<value>-2</value>
+				<cost>-2</cost>
+			</effect>
+			<effect>
+				<effectName>Pen4a</effectName>
+				<message>What the *family friendly game*, everyone loose 1 coin!</message>
+				<value>-1</value>
+				<cost>-1</cost>
+			</effect>
+			<effect>
+				<effectName>Pen4a</effectName>
+				<message>What the *family friendly game*, everyone loose 1 coin!</message>
+				<value>-1</value>
+				<cost>-1</cost>
+			</effect>
+			<effect>
+				<effectName>Loose</effectName>
+				<message>You loose 2 coins...</message>
+				<value>-2</value>
+				<cost>-2</cost>
+			</effect>
+			<effect>
+				<effectName>Bonus</effectName>
 				<message>You gain 6 coins!</message>
 				<value>6</value>
 				<cost>-6</cost>
 			</effect>
 			<effect>
-				<name>Pen4a</name>
-				<message>What the *family friendly game*, everyone loose 1 coin!</message>
-				<value>-1</value>
-				<cost>-1</cost>
-			</effect>
-			<effect>
-				<name>Loose</name>
-				<message>You loose 2 coins...</message>
-				<value>-2</value>
-				<cost>-2</cost>
-			</effect>
-			<effect>
-				<name>Pen4a</name>
-				<message>What the *family friendly game*, everyone loose 1 coin!</message>
-				<value>-1</value>
-				<cost>-1</cost>
-			</effect>
-			<effect>
-				<name>Bonus</name>
+				<effectName>Bonus</effectName>
 				<message>You gain 6 coins!</message>
 				<value>6</value>
 				<cost>-6</cost>
 			</effect>
 			<effect>
-				<name>Loose</name>
-				<message>You loose 2 coins...</message>
-				<value>-2</value>
-				<cost>-2</cost>
+				<effectName>Bonus</effectName>
+				<message>You gain 6 coins!</message>
+				<value>6</value>
+				<cost>-6</cost>
 			</effect>
 			<effect>
-				<name>Loose</name>
-				<message>You loose 2 coins...</message>
-				<value>-2</value>
-				<cost>-2</cost>
+				<effectName>Bonus</effectName>
+				<message>You gain 6 coins!</message>
+				<value>6</value>
+				<cost>-6</cost>
 			</effect>
 			<effect>
-				<name>Pen4a</name>
-				<message>What the *family friendly game*, everyone loose 1 coin!</message>
-				<value>-1</value>
-				<cost>-1</cost>
-			</effect>
-			<effect>
-				<name>Empty</name>
+				<effectName>Empty</effectName>
 				<message>Nothing happened.</message>
 				<value>0</value>
 				<cost>-1</cost>
 			</effect>
 			<effect>
-				<name>Empty</name>
-				<message>Nothing happened.</message>
-				<value>0</value>
-				<cost>-1</cost>
-			</effect>
-			<effect>
-				<name>Empty</name>
-				<message>Nothing happened.</message>
-				<value>0</value>
-				<cost>-1</cost>
-			</effect>
-			<effect>
-				<name>Pen4a</name>
-				<message>What the *family friendly game*, everyone loose 1 coin!</message>
-				<value>-1</value>
-				<cost>-1</cost>
-			</effect>
-			<effect>
-				<name>Loose</name>
+				<effectName>Loose</effectName>
 				<message>You loose 2 coins...</message>
 				<value>-2</value>
 				<cost>-2</cost>
 			</effect>
 			<effect>
-				<name>Pen4a</name>
-				<message>What the *family friendly game*, everyone loose 1 coin!</message>
-				<value>-1</value>
-				<cost>-1</cost>
-			</effect>
-			<effect>
-				<name>Bonus</name>
-				<message>You gain 6 coins!</message>
-				<value>6</value>
-				<cost>-6</cost>
-			</effect>
-			<effect>
-				<name>Bonus</name>
-				<message>You gain 6 coins!</message>
-				<value>6</value>
-				<cost>-6</cost>
-			</effect>
-			<effect>
-				<name>Loose</name>
+				<effectName>Loose</effectName>
 				<message>You loose 2 coins...</message>
 				<value>-2</value>
 				<cost>-2</cost>
-			</effect>
-			<effect>
-				<name>Bonus</name>
-				<message>You gain 6 coins!</message>
-				<value>6</value>
-				<cost>-6</cost>
-			</effect>
-			<effect>
-				<name>Bonus</name>
-				<message>You gain 6 coins!</message>
-				<value>6</value>
-				<cost>-6</cost>
 			</effect>
 		</effects>
 	</board>

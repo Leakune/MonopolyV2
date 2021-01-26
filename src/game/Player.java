@@ -15,6 +15,12 @@ public class Player {
         this.coins = coins;
         this.position = 0;
     }
+    //initialize from loadGame
+    public Player(String name, int coins, int position){
+        this.name = name;
+        this.coins = coins;
+        this.position = position;
+    }
 
     private String initName(){
         return Launcher.scanner.next();
@@ -33,8 +39,6 @@ public class Player {
         return this.position;
     }
     public void setPosition(int position){
-    	//TODO VERIF POSITION
-    	//if(this.position += position > Board.getSize())
 		this.position = position;
 	}
     public String useDice(){

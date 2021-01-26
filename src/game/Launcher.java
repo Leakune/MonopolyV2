@@ -26,12 +26,8 @@ public class Launcher {
 				}
 				case 2 -> {
 					System.out.println("Loading Game...");
-					//GameFile.loadGame();
-					LoadGame read = new LoadGame();
-			        List<Item> readConfig = read.readConfig("saveFile.xml");
-			        for (Item item : readConfig) {
-			            System.out.println(item);
-			        }
+					Game continueGame = LoadGame.loadGame();
+					continueGame.startGame();
 				}
 				case 3 -> {
 					System.out.println("Exiting the game.. See ya next time !");

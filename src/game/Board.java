@@ -8,10 +8,9 @@ import java.util.Scanner;
 public class Board {
     private final String name;
     private final int size;
-    //private Square[] squares;
-    private Effect[] effect;
-    
+    private ArrayList<Effect> effect;
     private final ArrayList<Player> players;
+    
     private static final Random RANDOM = new Random();
     private final static ResourceBundle bundle = ResourceBundle.getBundle("src.game.properties.config");
     private final static int MAX_BOARD_SIZE = Integer.parseInt(bundle.getString("MAX_BOARD_SIZE"));
@@ -28,7 +27,13 @@ public class Board {
         this.players = initPlayers();
         this.effect = generateEffect();
     }
-
+    //initialize from loadGame
+    public Board(String name, int size, ArrayList<Player> players, ArrayList<Effect> effect){
+    	this.name = name;
+        this.size = size;
+        this.players = players;
+        this.effect = effect;
+    }
     public String getName(){
         return this.name;
     }
@@ -40,10 +45,10 @@ public class Board {
     	return this.players;
     }
     public Effect getEffect(int position) {
-    	return this.effect[position];
+    	return this.effect.get(position);
     }
     public void setEffect(Effect newEffect, int position) {
-    	this.effect[position] = newEffect;
+    	this.effect.set(position, newEffect);
     }
     private String initName(){
         int boardName = 0;
@@ -84,11 +89,11 @@ public class Board {
         return players;
     }
     
-    private Effect[] generateEffect(){
-    	Effect[] boardEffects = new Effect[size];
-		boardEffects[0] = Effect.BEGIN;
+    private ArrayList<Effect> generateEffect(){
+    	ArrayList<Effect> boardEffects = new ArrayList<>();
+		boardEffects.add(Effect.BEGIN);
 		for (int i = 1; i < size; i++) {
-			boardEffects[i] = Effect.values()[RANDOM.nextInt(Effect.values().length - 1) + 1];
+			boardEffects.add(Effect.values()[RANDOM.nextInt(Effect.values().length - 1) + 1]);
 		}
 		return boardEffects;
 	}
@@ -103,7 +108,7 @@ public class Board {
         	sb.append("|------");
         	//sb.append(effect[i].toString());
         	sb.append(i + " ");
-        	sb.append(effect[i].getName());
+        	sb.append(effect.get(i).getName());
         	for (Player p : players) {
         		if(p.getPosition() == i) {
         			sb.append(" " + p.getName());

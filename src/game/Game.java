@@ -16,6 +16,11 @@ public class Game {
         this.id = initUniqId();
         this.board = new Board();
     }
+    //initialize from loadGame
+    public Game(int id, Board board){     
+        this.id = id;
+        this.board = board;
+    }
 
     public int getId(){
         return this.id;

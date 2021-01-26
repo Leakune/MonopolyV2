@@ -14,14 +14,16 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 public class SaveGame {
-	private static final String saveFile = "saveFile.xml";
-	// create an XMLEventFactory -> allows create XMLEvents instances
-	private static final XMLEventFactory eventFactory = XMLEventFactory.newInstance();
+	private static final String SAVE_FILE = "saveFile.xml";
+	// create an XMLEVENT_FACTORY -> allows create XMLEvents instances
+	private static final XMLEventFactory EVENT_FACTORY = XMLEventFactory.newInstance();
+	
 	// StartDocument XMLEvent = <?xml version="1.0" encoding="UTF-8"?>
-    private static final StartDocument startDocument = eventFactory.createStartDocument();
+    private static final StartDocument START_DOCUMENT = EVENT_FACTORY.createStartDocument();
+    
     //characters of end-of-line and tabulation
-	private static final XMLEvent end = eventFactory.createDTD("\n");
-	private static final XMLEvent tab = eventFactory.createDTD("\t");
+	private static final XMLEvent END = EVENT_FACTORY.createDTD("\n");
+	private static final XMLEvent TAB = EVENT_FACTORY.createDTD("\t");
     
 
     public static void saveConfig(Game dataGame) throws Exception {
@@ -29,15 +31,15 @@ public class SaveGame {
         XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
         
         // create XMLEventWriter -> interface to write content in XML file
-        XMLEventWriter eventWriter = outputFactory.createXMLEventWriter(new FileOutputStream(saveFile));  
+        XMLEventWriter eventWriter = outputFactory.createXMLEventWriter(new FileOutputStream(SAVE_FILE));  
         
-        eventWriter.add(startDocument);
-        eventWriter.add(end);     
+        eventWriter.add(START_DOCUMENT);
+        eventWriter.add(END);     
         createStartElement(eventWriter, "game", 0);       
         createNode(eventWriter, "id", String.format("%d",dataGame.getId()), 1);
         createBoardNode(eventWriter, dataGame.getBoard());      
         createEndElement(eventWriter, "game", 0);       
-        eventWriter.add(eventFactory.createEndDocument());
+        eventWriter.add(EVENT_FACTORY.createEndDocument());
         eventWriter.close();
     }
     
@@ -45,7 +47,7 @@ public class SaveGame {
     	createStartElement(eventWriter, "effects", 2);
         for(int i = 0; i < board.getSize(); i++) {
         	createStartElement(eventWriter, "effect", 3);
-        	createNode(eventWriter, "name", board.getEffect(i).getName(), 4);
+        	createNode(eventWriter, "effectName", board.getEffect(i).getName(), 4);
         	createNode(eventWriter, "message", board.getEffect(i).getMessage(), 4);
         	createNode(eventWriter, "value", String.format("%d",board.getEffect(i).getValue()), 4);
         	createNode(eventWriter, "cost", String.format("%d",board.getEffect(i).getCost()), 4);
@@ -84,40 +86,40 @@ public class SaveGame {
     // create a tag of an element
     private static void createStartElement(XMLEventWriter eventWriter, String name, int lvlTab) throws XMLStreamException {
     	for(int i = 0; i < lvlTab; i++) {
-        	eventWriter.add(tab);
+        	eventWriter.add(TAB);
         }
-    	StartElement boardStartElement = eventFactory.createStartElement("",
+    	StartElement boardStartElement = EVENT_FACTORY.createStartElement("",
                 "", name);
         eventWriter.add(boardStartElement);
-        eventWriter.add(end);
+        eventWriter.add(END);
     }
     
     //create tag end of an element
     private static void createEndElement(XMLEventWriter eventWriter, String name, int lvlTab) throws XMLStreamException {
     	for(int i = 0; i < lvlTab; i++) {
-    		eventWriter.add(tab);
+    		eventWriter.add(TAB);
         }
-    	eventWriter.add(eventFactory.createEndElement("", "", name));
-        eventWriter.add(end);
+    	eventWriter.add(EVENT_FACTORY.createEndElement("", "", name));
+        eventWriter.add(END);
     }
     
     //write a node with content
     private static void createNode(XMLEventWriter eventWriter, String name,
             String value, int lvlTab) throws XMLStreamException {
         // create Start node
-        StartElement sElement = eventFactory.createStartElement("", "", name);
+        StartElement sElement = EVENT_FACTORY.createStartElement("", "", name);
         for(int i = 0; i < lvlTab; i++) {
-        	eventWriter.add(tab);
+        	eventWriter.add(TAB);
         }
         eventWriter.add(sElement);
         if(value != null) {
         	// create Content
-            Characters characters = eventFactory.createCharacters(value);
+            Characters characters = EVENT_FACTORY.createCharacters(value);
             eventWriter.add(characters);
         }
         // create End node
-        EndElement eElement = eventFactory.createEndElement("", "", name);
+        EndElement eElement = EVENT_FACTORY.createEndElement("", "", name);
         eventWriter.add(eElement);
-        eventWriter.add(end);
+        eventWriter.add(END);
     } 
 }
