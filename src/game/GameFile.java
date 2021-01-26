@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class GameFile {
-	
+
 	private static final String fileName = "save.txt";
 	private static final Path path = Paths.get(fileName);
 	

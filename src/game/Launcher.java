@@ -2,6 +2,7 @@ package src.game;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 public class Launcher {
@@ -25,7 +26,12 @@ public class Launcher {
 				}
 				case 2 -> {
 					System.out.println("Loading Game...");
-					GameFile.loadGame();
+					//GameFile.loadGame();
+					LoadGame read = new LoadGame();
+			        List<Item> readConfig = read.readConfig("saveFile.xml");
+			        for (Item item : readConfig) {
+			            System.out.println(item);
+			        }
 				}
 				case 3 -> {
 					System.out.println("Exiting the game.. See ya next time !");

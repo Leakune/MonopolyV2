@@ -88,7 +88,12 @@ public class Game {
 							int rep = Launcher.scanner.nextInt();
 							if(rep==1){
 								//ici on enregistre la game dans la bdd et on lui retourne un code de la game
-								GameFile.SaveGame(this);
+								//GameFile.SaveGame(this);
+						        try {
+						            SaveGame.saveConfig(this);
+						        } catch (Exception e) {
+						            e.printStackTrace();
+						        }
 								return;
 							}else{
 								return;
