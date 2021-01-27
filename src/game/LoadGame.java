@@ -12,6 +12,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 public class LoadGame {
+
 	static final String GAME = "game";
     static final String ID = "id";
     static final String BOARD = "board";

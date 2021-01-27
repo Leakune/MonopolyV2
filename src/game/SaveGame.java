@@ -14,6 +14,23 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 public class SaveGame {
+	static final String GAME = "game";
+    static final String ID = "id";
+    static final String BOARD = "board";
+    static final String NAME_BOARD = "nameBoard";
+    static final String SIZE_BOARD = "sizeBoard";
+    static final String PLAYERS = "players";
+    static final String PLAYER = "player";
+    static final String PLAYER_NAME = "name";
+    static final String PLAYER_POSITION = "position";
+    static final String PLAYER_COINS = "coins";
+    static final String EFFECTS = "effects";
+    static final String EFFECT = "effect";
+    static final String EFFECT_NAME = "effectName";
+    static final String EFFECT_MESSAGE = "message";
+    static final String EFFECT_VALUE = "value";
+    static final String EFFECT_COST = "cost";
+    
 	private static final String SAVE_FILE = "saveFile.xml";
 	// create an XMLEVENT_FACTORY -> allows create XMLEvents instances
 	private static final XMLEventFactory EVENT_FACTORY = XMLEventFactory.newInstance();
@@ -35,51 +52,51 @@ public class SaveGame {
         
         eventWriter.add(START_DOCUMENT);
         eventWriter.add(END);     
-        createStartElement(eventWriter, "game", 0);       
-        createNode(eventWriter, "id", String.format("%d",dataGame.getId()), 1);
+        createStartElement(eventWriter, GAME, 0);       
+        createNode(eventWriter, ID, String.format("%d",dataGame.getId()), 1);
         createBoardNode(eventWriter, dataGame.getBoard());      
-        createEndElement(eventWriter, "game", 0);       
+        createEndElement(eventWriter, GAME, 0);       
         eventWriter.add(EVENT_FACTORY.createEndDocument());
         eventWriter.close();
     }
     
     private static void createEffectsNode(XMLEventWriter eventWriter, Board board) throws XMLStreamException {
-    	createStartElement(eventWriter, "effects", 2);
+    	createStartElement(eventWriter, EFFECTS, 2);
         for(int i = 0; i < board.getSize(); i++) {
-        	createStartElement(eventWriter, "effect", 3);
-        	createNode(eventWriter, "effectName", board.getEffect(i).getName(), 4);
-        	createNode(eventWriter, "message", board.getEffect(i).getMessage(), 4);
-        	createNode(eventWriter, "value", String.format("%d",board.getEffect(i).getValue()), 4);
-        	createNode(eventWriter, "cost", String.format("%d",board.getEffect(i).getCost()), 4);
-            createEndElement(eventWriter, "effect", 3);
+        	createStartElement(eventWriter, EFFECT, 3);
+        	createNode(eventWriter, EFFECT_NAME, board.getEffect(i).getName(), 4);
+        	createNode(eventWriter, EFFECT_MESSAGE, board.getEffect(i).getMessage(), 4);
+        	createNode(eventWriter, EFFECT_VALUE, String.format("%d",board.getEffect(i).getValue()), 4);
+        	createNode(eventWriter, EFFECT_COST, String.format("%d",board.getEffect(i).getCost()), 4);
+            createEndElement(eventWriter, EFFECT, 3);
         }
-        createEndElement(eventWriter, "effects", 2);
+        createEndElement(eventWriter, EFFECTS, 2);
     }
     
     private static void createPlayersNode(XMLEventWriter eventWriter, ArrayList<Player> players) throws XMLStreamException {
-    	createStartElement(eventWriter, "players", 2);
+    	createStartElement(eventWriter, PLAYERS, 2);
         for(Player player : players) {
-        	createStartElement(eventWriter, "player", 3);
-        	createNode(eventWriter, "name", player.getName(), 4);
-        	createNode(eventWriter, "position", String.format("%d",player.getPosition()), 4);
-        	createNode(eventWriter, "coins", String.format("%d",player.getCoins()), 4);
-            createEndElement(eventWriter, "player", 3);
+        	createStartElement(eventWriter, PLAYER, 3);
+        	createNode(eventWriter, PLAYER_NAME, player.getName(), 4);
+        	createNode(eventWriter, PLAYER_POSITION, String.format("%d",player.getPosition()), 4);
+        	createNode(eventWriter, PLAYER_COINS, String.format("%d",player.getCoins()), 4);
+            createEndElement(eventWriter, PLAYER, 3);
         }
-        createEndElement(eventWriter, "players", 2);
+        createEndElement(eventWriter, PLAYERS, 2);
 
     }
     
     private static void createBoardNode(XMLEventWriter eventWriter, Board board) throws XMLStreamException {
-    	createStartElement(eventWriter, "board", 1);
-        createNode(eventWriter, "nameBoard", board.getName(), 2);
-        createNode(eventWriter, "sizeBoard", String.format("%d",board.getSize()), 2);
+    	createStartElement(eventWriter, BOARD, 1);
+        createNode(eventWriter, NAME_BOARD, board.getName(), 2);
+        createNode(eventWriter, SIZE_BOARD, String.format("%d",board.getSize()), 2);
         
         //Players
         createPlayersNode(eventWriter, board.getPlayers());
         //Effects
         createEffectsNode(eventWriter, board);
         
-        createEndElement(eventWriter, "board", 1);
+        createEndElement(eventWriter, BOARD, 1);
         
     }
     

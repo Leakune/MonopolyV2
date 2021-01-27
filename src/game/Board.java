@@ -3,7 +3,6 @@ package src.game;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class Board {
     private final String name;
@@ -18,7 +17,6 @@ public class Board {
     private final static String[] BOARD_NAMES = {"Ice","Temple","Jungle","Fire"};
     private final static int MAX_PLAYERS = Integer.parseInt(bundle.getString("MAX_PLAYERS"));
     private final static int MIN_PLAYERS = Integer.parseInt(bundle.getString("MIN_PLAYERS"));
-    //private final static int START_COINS = Integer.parseInt(bundle.getString("START_COINS"));
     
 
     public Board(){
@@ -105,6 +103,9 @@ public class Board {
     		sb.append(p.toString());
         }
         for(int i = 0; i < this.getSize(); i++) {
+        	if(i%6 == 0) {
+        		sb.append("\n");
+        	}
         	sb.append("|------");
         	//sb.append(effect[i].toString());
         	sb.append(i + " ");
