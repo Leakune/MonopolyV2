@@ -47,7 +47,6 @@ public class Launcher {
 				}
 			} catch(NumberFormatException e){
 	            System.out.println("Veuillez saisir un chiffre");
-	            scanner.nextLine();
 	        }
 				
 		}

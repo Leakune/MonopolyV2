@@ -69,7 +69,6 @@ public class Game {
 						}
 					} catch(NumberFormatException e){
 			            System.out.println("Veuillez saisir un chiffre");
-			            Launcher.scanner.nextLine();
 			        }
 				}
 				if (player.getPosition() >= board.getSize()) {
@@ -118,7 +117,6 @@ public class Game {
 				return;
 			} catch(NumberFormatException e){
 	            System.out.println("Veuillez saisir un chiffre");
-	            Launcher.scanner.nextLine();
 	        }
 		}
     }
