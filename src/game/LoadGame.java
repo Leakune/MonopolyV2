@@ -35,7 +35,7 @@ public class LoadGame {
     
 
     @SuppressWarnings("resource")
-	public static Game loadGame() {
+	public static Game loadGame() throws FileNotFoundException, XMLStreamException {
     	int id = NOT_FOUND_AT_THE_MOMENT;
     	//board
         Board board = null;
@@ -55,112 +55,108 @@ public class LoadGame {
         int position = NOT_FOUND_AT_THE_MOMENT;
         int coins = NOT_FOUND_AT_THE_MOMENT;
         
-        try {
-            //create a XMLInputFactory -> class supporting XMLEventReader
-            XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-            
-            //XMLEvenReader -> interface to read content in XML file
-            XMLEventReader eventReader = inputFactory.createXMLEventReader(new FileInputStream(SAVE_FILE));
-                   	
-        	
-            // read the XML document
-            while (eventReader.hasNext()) {
-                XMLEvent event = eventReader.nextEvent();
+        //create a XMLInputFactory -> class supporting XMLEventReader
+        XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+        
+        //XMLEvenReader -> interface to read content in XML file
+        XMLEventReader eventReader = inputFactory.createXMLEventReader(new FileInputStream(SAVE_FILE));
+               	
+    	
+        // read the XML document
+        while (eventReader.hasNext()) {
+            XMLEvent event = eventReader.nextEvent();
 
-                if (event.isStartElement()) {
-                    StartElement startElement = event.asStartElement();
-                    // If we have an item element, we create a new item
-                        String elementName = startElement.getName().getLocalPart();
-                        switch (elementName) {
-                        case ID:
-                            event = eventReader.nextEvent();
-                            id =  Integer.parseInt(event.asCharacters().getData());
-                            break;
-                        case NAME_BOARD:
-                            event = eventReader.nextEvent();
-                            nameBoard = event.asCharacters().getData();
-                            break;
-                        case SIZE_BOARD:
-                            event = eventReader.nextEvent();
-                            sizeBoard = Integer.parseInt(event.asCharacters().getData());
-                            break;
-                        case PLAYER_NAME:
-                            event = eventReader.nextEvent();
-                            namePlayer = event.asCharacters().getData();
-                            break;
-                        case PLAYER_POSITION:
-                            event = eventReader.nextEvent();
-                            position = Integer.parseInt(event.asCharacters().getData());
-                            break;
-                        case PLAYER_COINS:
-                            event = eventReader.nextEvent();
-                            coins = Integer.parseInt(event.asCharacters().getData());
-                            break;
-                        case EFFECT_NAME:
-                            event = eventReader.nextEvent();
-                            nameEffect = event.asCharacters().getData();
-                            break;
-                        case EFFECT_MESSAGE:
-                            event = eventReader.nextEvent();
-                            message = event.asCharacters().getData();
-                            break;
-                        case EFFECT_VALUE:
-                            event = eventReader.nextEvent();
-                            value = Integer.parseInt(event.asCharacters().getData());
-                            break;
-                        case EFFECT_COST:
-                            event = eventReader.nextEvent();
-                            cost = Integer.parseInt(event.asCharacters().getData());
-                            break;
-                        }
-                }
-                    // reach the end of an element
-                else if (event.isEndElement()) {
-                    EndElement endElement = event.asEndElement();
-                    String elementName = endElement.getName().getLocalPart();
+            if (event.isStartElement()) {
+                StartElement startElement = event.asStartElement();
+                // If we have an item element, we create a new item
+                    String elementName = startElement.getName().getLocalPart();
                     switch (elementName) {
-                        case PLAYER:
-                            if(!arePlayersPropsGood(namePlayer, position, coins)) {
-                            	System.out.println("Error, not all props are good for a player");
-                            	return null;
-                            }
-                            players.add(new Player(namePlayer, coins, position));
-                            namePlayer = null;
-                        	position = NOT_FOUND_AT_THE_MOMENT;
-                        	coins = NOT_FOUND_AT_THE_MOMENT;
+                    case ID:
+                        event = eventReader.nextEvent();
+                        id =  Integer.parseInt(event.asCharacters().getData());
                         break;
-                        case EFFECT:
-                        	if(!areEffectsPropsGood(nameEffect, message, value, cost)) {
-                            	System.out.println("Error, not all props are good for a effect");
-                            	return null;
-                            }
-                        	Effect newEffect = addEffect(nameEffect);
-                        	effect.add(newEffect);
-                        	nameEffect = null;
-                            message = null;
-                            value = NOT_FOUND_AT_THE_MOMENT;
-                        	cost = NOT_FOUND_AT_THE_MOMENT;
+                    case NAME_BOARD:
+                        event = eventReader.nextEvent();
+                        nameBoard = event.asCharacters().getData();
                         break;
-                        case BOARD:
-                        	if(!areBoardsPropsGood(nameBoard, sizeBoard)) {
-                            	System.out.println("Error, not all props are good for a board");
-                            	return null;
-                            }
-                        	board = new Board(nameBoard, sizeBoard, players, effect);
+                    case SIZE_BOARD:
+                        event = eventReader.nextEvent();
+                        sizeBoard = Integer.parseInt(event.asCharacters().getData());
                         break;
-                        case GAME:
-                        	if(!areGamesPropsGood(board, id)) {
-                            	System.out.println("Error, not all props are good for game");
-                            	return null;
-                            }
-                        	board = new Board(nameBoard, sizeBoard, players, effect);
+                    case PLAYER_NAME:
+                        event = eventReader.nextEvent();
+                        namePlayer = event.asCharacters().getData();
+                        break;
+                    case PLAYER_POSITION:
+                        event = eventReader.nextEvent();
+                        position = Integer.parseInt(event.asCharacters().getData());
+                        break;
+                    case PLAYER_COINS:
+                        event = eventReader.nextEvent();
+                        coins = Integer.parseInt(event.asCharacters().getData());
+                        break;
+                    case EFFECT_NAME:
+                        event = eventReader.nextEvent();
+                        nameEffect = event.asCharacters().getData();
+                        break;
+                    case EFFECT_MESSAGE:
+                        event = eventReader.nextEvent();
+                        message = event.asCharacters().getData();
+                        break;
+                    case EFFECT_VALUE:
+                        event = eventReader.nextEvent();
+                        value = Integer.parseInt(event.asCharacters().getData());
+                        break;
+                    case EFFECT_COST:
+                        event = eventReader.nextEvent();
+                        cost = Integer.parseInt(event.asCharacters().getData());
                         break;
                     }
-                 }
-
             }
-        } catch (FileNotFoundException | XMLStreamException e) {
-            e.printStackTrace();
+                // reach the end of an element
+            else if (event.isEndElement()) {
+                EndElement endElement = event.asEndElement();
+                String elementName = endElement.getName().getLocalPart();
+                switch (elementName) {
+                    case PLAYER:
+                        if(!arePlayersPropsGood(namePlayer, position, coins)) {
+                        	System.out.println("Error, not all props are good for a player");
+                        	return null;
+                        }
+                        players.add(new Player(namePlayer, coins, position));
+                        namePlayer = null;
+                    	position = NOT_FOUND_AT_THE_MOMENT;
+                    	coins = NOT_FOUND_AT_THE_MOMENT;
+                    break;
+                    case EFFECT:
+                    	if(!areEffectsPropsGood(nameEffect, message, value, cost)) {
+                        	System.out.println("Error, not all props are good for a effect");
+                        	return null;
+                        }
+                    	Effect newEffect = addEffect(nameEffect);
+                    	effect.add(newEffect);
+                    	nameEffect = null;
+                        message = null;
+                        value = NOT_FOUND_AT_THE_MOMENT;
+                    	cost = NOT_FOUND_AT_THE_MOMENT;
+                    break;
+                    case BOARD:
+                    	if(!areBoardsPropsGood(nameBoard, sizeBoard)) {
+                        	System.out.println("Error, not all props are good for a board");
+                        	return null;
+                        }
+                    	board = new Board(nameBoard, sizeBoard, players, effect);
+                    break;
+                    case GAME:
+                    	if(!areGamesPropsGood(board, id)) {
+                        	System.out.println("Error, not all props are good for game");
+                        	return null;
+                        }
+                    	board = new Board(nameBoard, sizeBoard, players, effect);
+                    break;
+                }
+             }
+
         }
         return new Game(id, board);
     }

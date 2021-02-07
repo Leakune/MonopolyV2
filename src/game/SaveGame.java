@@ -1,8 +1,10 @@
 package src.game;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
+import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLOutputFactory;
@@ -43,7 +45,7 @@ public class SaveGame {
 	private static final XMLEvent TAB = EVENT_FACTORY.createDTD("\t");
     
 
-    public static void saveConfig(Game dataGame) throws Exception {
+    public static void saveConfig(Game dataGame) throws XMLStreamException, FileNotFoundException, FactoryConfigurationError {
         // create an XMLOutputFactory -> class supporting XMLEventWriter
         XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
         

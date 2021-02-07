@@ -1,19 +1,27 @@
 package src.game;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+import javax.xml.parsers.FactoryConfigurationError;
+import javax.xml.stream.XMLStreamException;
+
 
 public class Game {
-    private final int id;
+    private int id;
     private final Board board;
     
     private final static ResourceBundle bundle = ResourceBundle.getBundle("src.game.properties.config");
     private final static int CDT_TO_WIN = Integer.parseInt(bundle.getString("CDT_TO_WIN"));
 
     
-    public Game(){     
-        this.id = initUniqId();
+    public Game(){
+        try {
+        	this.id = initUniqId();
+        } catch(NumberFormatException e) {
+        	e.printStackTrace();
+        }
         this.board = new Board();
     }
     //initialize from loadGame
@@ -29,7 +37,7 @@ public class Game {
     	return this.board;
     }
     
-    private int initUniqId() {
+    private int initUniqId() throws NumberFormatException{
     	LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMddmmss");
         return Integer.parseInt(dtf.format(now));
@@ -44,20 +52,25 @@ public class Game {
 					System.out.println(player.getName() + " what do you want to do ?");
 					System.out.println("1. Use dice 2. Use coins 3. Exit");
 					System.out.print("Select : >");
-					switch (Launcher.scanner.nextInt()) {
-						case 1 ->{
-							System.out.println(player.useDice());
-							waiting = false;
+					try {
+						switch (Integer.parseInt(Launcher.scanner.nextLine())) {
+							case 1 ->{
+								System.out.println(player.useDice());
+								waiting = false;
+							}
+							case 2 -> {
+								coinsGui(player);						
+							}
+							case 3 -> {
+								exitGame();
+								return;
+							}
+							default -> System.out.println("Not implemented yet..");
 						}
-						case 2 -> {
-							coinsGui(player);						
-						}
-						case 3 -> {
-							exitGame();
-							return;
-						}
-						default -> System.out.println("Not implemented yet..");
-					}
+					} catch(NumberFormatException e){
+			            System.out.println("Veuillez saisir un chiffre");
+			            Launcher.scanner.nextLine();
+			        }
 				}
 				if (player.getPosition() >= board.getSize()) {
 					player.setPosition(player.getPosition() - board.getSize());
@@ -81,18 +94,32 @@ public class Game {
     	return false;
     }
     public void exitGame() {
-    	System.out.println("Do you want to save the game before exit ?");
-		System.out.println("1. Yes 2. NO");
-		int rep = Launcher.scanner.nextInt();
-		if(rep==1){
-	        try {
-	            SaveGame.saveConfig(this);
-	        } catch (Exception e) {
-	            e.printStackTrace();
+		while (true) {
+			System.out.println("Do you want to save the game before exit ?");
+			System.out.println("1. Yes 2. NO");
+			try {
+				int rep = Integer.parseInt(Launcher.scanner.nextLine());
+				if(rep==1){
+			        try {
+			            SaveGame.saveConfig(this);
+			        } catch (XMLStreamException e) {
+			            e.printStackTrace();
+			        }
+			        catch (FileNotFoundException e) {
+			            e.printStackTrace();
+			        }
+			        catch (FactoryConfigurationError e) {
+			            e.printStackTrace();
+			        }
+			        catch (Exception e) {
+			            e.printStackTrace();
+			        }
+				}
+				return;
+			} catch(NumberFormatException e){
+	            System.out.println("Veuillez saisir un chiffre");
+	            Launcher.scanner.nextLine();
 	        }
-			return;
-		}else{
-			return;
 		}
     }
     public void coinsGui(Player player) {
