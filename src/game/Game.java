@@ -68,7 +68,7 @@ public class Game {
 							default -> System.out.println("Not implemented yet..");
 						}
 					} catch(NumberFormatException e){
-			            System.out.println("Veuillez saisir un chiffre");
+			            System.out.println("Choose a number");
 			        }
 				}
 				if (player.getPosition() >= board.getSize()) {
@@ -116,43 +116,58 @@ public class Game {
 				}
 				return;
 			} catch(NumberFormatException e){
-	            System.out.println("Veuillez saisir un chiffre");
+	            System.out.println("Choose a number");
 	        }
 		}
     }
     public void coinsGui(Player player) {
-    	System.out.println("You have "+player.getCoins()+" coins");
-		System.out.println("How do you want to spend coins ?");
-		System.out.println("1. Set a case to BONUS effect for "+Math.abs(Effect.BONUS.getCost())+" coins");
-		System.out.println("2. Set a case to LOOSE effect for "+Math.abs(Effect.LOOSE.getCost())+" coins");
-		System.out.println("3. Set a case to EMPTY effect for "+Math.abs(Effect.EMPTY.getCost())+" coins");
-		System.out.println("4. Set a case to PEN4A effect for "+Math.abs(Effect.PEN4A.getCost())+" coins");
-		System.out.println("5. Go back");
-		int res = Launcher.scanner.nextInt();
-		if(res >= 5) {
-			return;
-		}
-		Effect selectedEffect = Effect.chooseEffectToChange(res);
-		System.out.println("Your effect:" + selectedEffect.toString());
-		
-		if (selectedEffect.getValue() > player.getCoins()){
-			System.out.println("You don't have enough coins !");
-			return;
-		}
-		System.out.println("What case do you want to set ?");
-		System.out.println(board.toString());
-		int selectedCase;
-		do {
-			System.out.println("Please select the case:");
-			selectedCase = Launcher.scanner.nextInt();
-			if (selectedCase < 0 || selectedCase >= board.getSize() || board.getEffect(selectedCase) == selectedEffect) {
-				System.out.println("No such case or the case selected has already this effect !");
+		int res = 0;
+    	do {
+	    	System.out.println("You have "+player.getCoins()+" coins");
+			System.out.println("How do you want to spend coins ?");
+			System.out.println("1. Set a case to BONUS effect for "+Math.abs(Effect.BONUS.getCost())+" coins");
+			System.out.println("2. Set a case to LOOSE effect for "+Math.abs(Effect.LOOSE.getCost())+" coins");
+			System.out.println("3. Set a case to EMPTY effect for "+Math.abs(Effect.EMPTY.getCost())+" coins");
+			System.out.println("4. Set a case to PEN4A effect for "+Math.abs(Effect.PEN4A.getCost())+" coins");
+			System.out.println("5. Go back");
+			try {
+				res = Integer.parseInt(Launcher.scanner.nextLine());
+		    } catch(NumberFormatException e){
+		        System.out.println("Choose a number");
+		    }
+			if(res < 0 || res > 5) {
+				System.out.println("Veuillez sélectionner un bon choix");
+			}else if (res == 5) {
+				return;
 			}
-		} while (selectedCase < 0 || selectedCase >= board.getSize() || board.getEffect(selectedCase) == selectedEffect);
-		System.out.print("You have changed the case's effect " + board.getEffect(selectedCase).getName() +" into ");
-		player.setCoins(selectedEffect.getCost());
-		board.setEffect(selectedEffect, selectedCase);
-		System.out.println(board.getEffect(selectedCase).getName());
+    	} while (res <= 0 || res > 5);
+
+			Effect selectedEffect = Effect.chooseEffectToChange(res);
+			System.out.println("Your effect:" + selectedEffect.toString());
+			
+			if (selectedEffect.getValue() > player.getCoins()){
+				System.out.println("You don't have enough coins !");
+				return;
+			}
+			System.out.println("What case do you want to set ?");
+			System.out.println(board.toString());
+			int selectedCase = 0;
+			do {
+				try {
+					System.out.println("Please select the case:");
+					selectedCase = Integer.parseInt(Launcher.scanner.nextLine());
+				} catch(NumberFormatException e){
+		            System.out.println("Choose a number");
+		        }
+				if (selectedCase < 0 || selectedCase >= board.getSize() || board.getEffect(selectedCase) == selectedEffect) {
+					System.out.println("No such case or the case selected has already this effect !");
+				}
+			} while (selectedCase <= 0 || selectedCase >= board.getSize() || board.getEffect(selectedCase) == selectedEffect);
+			System.out.print("You have changed the case's effect " + board.getEffect(selectedCase).getName() +" into ");
+			player.setCoins(selectedEffect.getCost());
+			board.setEffect(selectedEffect, selectedCase);
+			System.out.println(board.getEffect(selectedCase).getName());
+  
     }
    
 

@@ -8,7 +8,7 @@
 			<player>
 				<name>lu</name>
 				<position>11</position>
-				<coins>29</coins>
+				<coins>23</coins>
 			</player>
 			<player>
 				<name>do</name>
@@ -35,10 +35,10 @@
 				<cost>-6</cost>
 			</effect>
 			<effect>
-				<effectName>Empty</effectName>
-				<message>Nothing happened.</message>
-				<value>0</value>
-				<cost>-1</cost>
+				<effectName>Bonus</effectName>
+				<message>You gain 6 coins!</message>
+				<value>6</value>
+				<cost>-6</cost>
 			</effect>
 			<effect>
 				<effectName>Loose</effectName>

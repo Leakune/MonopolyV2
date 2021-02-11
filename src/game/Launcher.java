@@ -46,7 +46,7 @@ public class Launcher {
 					default -> System.out.println("not implemented yet");
 				}
 			} catch(NumberFormatException e){
-	            System.out.println("Veuillez saisir un chiffre");
+	            System.out.println("Choose a number");
 	        }
 				
 		}

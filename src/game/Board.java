@@ -56,8 +56,12 @@ public class Board {
                     System.out.println("Map " + i + ": " + name);
                     i++;
                 }
-                System.out.println("Choose the number of map name:");
-                boardName = Launcher.scanner.nextInt();
+                try {
+	                System.out.println("Choose the number of map name:");
+	                boardName = Integer.parseInt(Launcher.scanner.nextLine());
+	            } catch(NumberFormatException e){
+		            System.out.println("Choose a number");
+		        }
             } while (boardName > BOARD_NAMES.length || boardName <= 0);
         return BOARD_NAMES[boardName-1];
     }
@@ -65,8 +69,12 @@ public class Board {
     private int initSize(){
         int boardSize = 0;
             do {
-                System.out.println("Enter the size of map (" + MIN_BOARD_SIZE + "-" + MAX_BOARD_SIZE + "):");
-                boardSize = Launcher.scanner.nextInt();
+            	try {
+	                System.out.println("Enter the size of map (" + MIN_BOARD_SIZE + "-" + MAX_BOARD_SIZE + "):");
+	                boardSize = Integer.parseInt(Launcher.scanner.nextLine());
+	            } catch(NumberFormatException e){
+		            System.out.println("Choose a number");
+		        }
             } while (boardSize > MAX_BOARD_SIZE || boardSize < MIN_BOARD_SIZE);
         return boardSize;
     }
@@ -75,8 +83,12 @@ public class Board {
         ArrayList<Player> players = new ArrayList<>();
         int arraySize = 0;
             do {
-                System.out.println("Enter the number of players (" + MIN_PLAYERS + "-" + MAX_PLAYERS + "):");
-                arraySize = Launcher.scanner.nextInt();
+            	try {
+	                System.out.println("Enter the number of players (" + MIN_PLAYERS + "-" + MAX_PLAYERS + "):");
+	                arraySize = Integer.parseInt(Launcher.scanner.nextLine());
+	            } catch(NumberFormatException e){
+		            System.out.println("Choose a number");
+		        }
             } while (arraySize > MAX_PLAYERS || arraySize < MIN_PLAYERS);
 
             for (int i = 0; i < arraySize; i++) {
