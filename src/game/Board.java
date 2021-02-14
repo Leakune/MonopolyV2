@@ -120,8 +120,8 @@ public class Board {
         	}
         	sb.append("|");
         	//sb.append(effect[i].toString());
-        	sb.append(i + " ");
-        	sb.append(effect.get(i).getName() != "Empty" ? effect.get(i).getName() : "___");
+        	sb.append(i);
+        	sb.append(effect.get(i).getName() != "Empty" ? " " + effect.get(i).getName() : "");
         	for (Player p : players) {
         		if(p.getPosition() == i) {
         			sb.append(" " + p.getName());
