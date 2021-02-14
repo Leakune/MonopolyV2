@@ -143,7 +143,7 @@ public class Game {
     	} while (res <= 0 || res > 5);
 
 			Effect selectedEffect = Effect.chooseEffectToChange(res);
-			System.out.println("Your effect:" + selectedEffect.toString());
+			System.out.println("Your effect:" + selectedEffect.getName());
 			
 			if (selectedEffect.getValue() > player.getCoins()){
 				System.out.println("You don't have enough coins !");

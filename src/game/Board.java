@@ -118,16 +118,16 @@ public class Board {
         	if(i%6 == 0) {
         		sb.append("\n");
         	}
-        	sb.append("|------");
+        	sb.append("|");
         	//sb.append(effect[i].toString());
         	sb.append(i + " ");
-        	sb.append(effect.get(i).getName());
+        	sb.append(effect.get(i).getName() != "Empty" ? effect.get(i).getName() : "___");
         	for (Player p : players) {
         		if(p.getPosition() == i) {
         			sb.append(" " + p.getName());
         		}
             }
-        	sb.append("------|");
+        	sb.append("|");
         }
         return sb.toString();
     }
